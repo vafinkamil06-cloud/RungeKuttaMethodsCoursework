@@ -1,14 +1,20 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.18)
 
-project(Runge-Cuttas)
+project(RungeKuttaMethods LANGUAGES CXX)
 
-include_directories(${PROJECT_SOURCE_DIR}/..)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(PythonLibs REQUIRED)
-find_package(Python2 REQUIRED)
-
-include_directories(${PYTHON_INCLUDE_DIRS})
+find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
 
 add_executable(Runge-Cuttas main.cpp)
 
-target_link_libraries(Runge-Cuttas PRIVATE -lpython3.5m)
+target_include_directories(Runge-Cuttas PRIVATE
+    ${PROJECT_SOURCE_DIR}
+)
+
+target_link_libraries(Runge-Cuttas PRIVATE
+    Python3::Python
+    Python3::NumPy
+)

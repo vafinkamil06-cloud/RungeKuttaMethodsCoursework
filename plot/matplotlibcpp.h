@@ -455,7 +455,10 @@ bool plot(const std::vector<Numeric> &x, const std::vector<Numeric> &y, const st
     PyObject* kwargs = PyDict_New();
     for(std::map<std::string, std::string>::const_iterator it = keywords.begin(); it != keywords.end(); ++it)
     {
-        PyDict_SetItemString(kwargs, it->first.c_str(), PyString_FromString(it->second.c_str()));
+        if (it->first == "rotation")
+            PyDict_SetItemString(kwargs, it->first.c_str(), PyFloat_FromDouble(std::stod(it->second)));
+        else
+            PyDict_SetItemString(kwargs, it->first.c_str(), PyString_FromString(it->second.c_str()));
     }
 
     PyObject* res = PyObject_Call(detail::_interpreter::get().s_python_function_plot, args, kwargs);
@@ -2233,7 +2236,10 @@ inline void tick_params(const std::map<std::string, std::string>& keywords, cons
   PyObject* kwargs = PyDict_New();
   for (std::map<std::string, std::string>::const_iterator it = keywords.begin(); it != keywords.end(); ++it)
   {
-    PyDict_SetItemString(kwargs, it->first.c_str(), PyString_FromString(it->second.c_str()));
+    if (it->first == "labelrotation")
+      PyDict_SetItemString(kwargs, it->first.c_str(), PyFloat_FromDouble(std::stod(it->second)));
+    else
+      PyDict_SetItemString(kwargs, it->first.c_str(), PyString_FromString(it->second.c_str()));
   }
 
 
@@ -2252,9 +2258,9 @@ inline void subplot(long nrows, long ncols, long plot_number)
 
     // construct positional args
     PyObject* args = PyTuple_New(3);
-    PyTuple_SetItem(args, 0, PyFloat_FromDouble(nrows));
-    PyTuple_SetItem(args, 1, PyFloat_FromDouble(ncols));
-    PyTuple_SetItem(args, 2, PyFloat_FromDouble(plot_number));
+    PyTuple_SetItem(args, 0, PyLong_FromLong(nrows));
+    PyTuple_SetItem(args, 1, PyLong_FromLong(ncols));
+    PyTuple_SetItem(args, 2, PyLong_FromLong(plot_number));
 
     PyObject* res = PyObject_CallObject(detail::_interpreter::get().s_python_function_subplot, args);
     if(!res) throw std::runtime_error("Call to subplot() failed.");

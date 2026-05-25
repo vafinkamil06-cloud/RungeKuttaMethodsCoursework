@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/nail/mytestprojects/RungeKuttaMethods/build",
-  "command": "/usr/bin/g++   -I/home/nail/mytestprojects/RungeKuttaMethods/.. -I/usr/include/python3.5m  -O3 -DNDEBUG   -o CMakeFiles/Runge-Cuttas.dir/main.cpp.o -c /home/nail/mytestprojects/RungeKuttaMethods/main.cpp",
-  "file": "/home/nail/mytestprojects/RungeKuttaMethods/main.cpp"
-}
-]

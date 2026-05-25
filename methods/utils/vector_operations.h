@@ -17,7 +17,7 @@ double norm(
         }
     );
 
-    return std::accumulate(diff.begin(), diff.end(), 0);
+    return std::accumulate(diff.begin(), diff.end(), 0.0);
 }
 
 std::vector<double> operator*(double scalar, std::vector<double> vec)
