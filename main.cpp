@@ -273,7 +273,7 @@ void run_task4()
 
     value_type start_t = 0.0;
     value_type period = 11.124340337;
-    value_type h = 0.001;
+    value_type h = 0.0001;
     vector_of_values start_y = {0.994, 0.0, 0.0, -2.031732629557337};
 
     auto numeric = integrate_merson(arenstorf_rhs(), start_t, start_y, period, h);
